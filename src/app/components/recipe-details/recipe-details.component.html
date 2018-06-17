@@ -1,0 +1,32 @@
+<p (click) ="gobackbuttonPressed()" style="cursor: pointer;">Go Back</p>
+<p *ngIf="!recipe">
+  Loading... Please wait a moment
+</p>
+<div *ngIf= "recipe" class="card">
+  <div class="card-header"> {{recipe.title}} </div>
+  <div class="card-body">
+    <p class="card-text"> {{recipe.description}} </p>
+    <p clas="card-text">
+      <span>
+        <strong>Feed this to:</strong>
+      </span>{{recipe.feedThisMany}}</p>
+    <p clas="card-text">
+      <span>
+        <strong>Prepration Time:</strong>
+      </span>{{recipe.preparationTime}}</p>
+
+    <h4>Ingredients</h4>
+    <ul>
+      <li *ngFor="let ing of recipe.ingredient">
+        {{ ing.ingredient}} ({{ ing.measure }})
+      </li>
+    </ul>
+
+    <h4> Instructions </h4>
+    <ol>
+      <li *ngFor="let instruction of recipe.instruction">
+        {{ instruction.instruction }}
+      </li>
+    </ol>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-sm-8">
+    <div class="card text-center">
+      <div class="card-header">
+        Add Recipe
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="recipeInProgess.title" placeholder="Recipe title" name="title">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" row="5" [(ngModel)]="recipeInProgess.description" placeholder="Recipe Description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <div class="input-group ">
+              <input type="number" class="form-control" [(ngModel)]="recipeInProgess.feedThisMany" placeholder="Feeds this people" name="feedThisMany">
+              <div class="input-group-append">
+                <span class="input-group-text">people</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-group ">
+              <input type="number" class="form-control" [(ngModel)]="recipeInProgess.preparationTime" placeholder="Prepration Time" name="preparationTime">
+              <div class="input-group-append">
+                <span class="input-group-text">minutes</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+
+            <div class="row" *ngFor="let ints of recipeInProgess.ingredient; let i =index">
+              <input type="text" class="form-control col-sm-5" [(ngModel)]="recipeInProgess.ingredient[i].ingredient" placeholder="Ingredient" name ="ingredient"/>
+              <input type="text" class="form-control col-sm-5" [(ngModel)]="recipeInProgess.ingredient[i].measure" placeholder="How much?" name = "measure"/>
+              <p style="cursor: pointer;" (click)= "removeIngredients(i)">Remove</p>
+            </div>
+
+
+            <input type="button" value="add" (click)="addIngredients()">
+          </div>
+          <div class="form-group">
+
+              <div class="row" *ngFor="let ing of recipeInProgess.instruction; let i =index">
+                <input type="text" class="form-control col-sm-5" [(ngModel)]="recipeInProgess.instruction[i].ingredient" placeholder="Ingredient" name ="instruction"/>
+             
+                <p style="cursor: pointer;" (click)= "removeInstruction(i)">Remove</p>
+              </div>
+  
+  
+              <input type="button" value="add" (click)="addInstruction()">
+            </div>
+
+          <button type="submit" class="btn btn-primary" (click)="addRecipeClicked()">Submit</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

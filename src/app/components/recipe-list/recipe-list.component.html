@@ -1,0 +1,17 @@
+<div class="row">
+  <p (click) ="viewaddRecipeClicked()" style="cursor: pointer;">Add recipe</p>
+  
+</div>
+<p *ngIf="!recipeLoaded">
+  Please wait Recipe is loading
+</p>
+<p *ngIf="recipeLoaded && (!recipe || !recipe.length)">
+  There are no recipes. Why not add one now?
+</p>
+<div *ngIf="recipeLoaded" class="row">
+  
+  <div  class="col-sm-5" *ngFor="let recipe of recipes" >
+    <app-recipe-summary [recipe]="recipe" (zoomIn) = "userClickedOnRecipe($event)"></app-recipe-summary>
+  </div>
+
+</div>
