@@ -1,33 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '../model/recipe';
-import {Http } from '@angular/Http';
+// import {HttpModule } from '@angular/Http';
+import { HttpClient } from '@angular/common/http';
+
 
 
 const RECIPE_SERVER = 'http://localhost:8080';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RecipeService {
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
-  getAllRecipe(): Promise<Recipe[]> {
+  getAllRecipe(): any {
     return this.http
-        .get(RECIPE_SERVER + '/v1/recipes.json')
-        .toPromise()
-        .then(response => response.json().data as Recipe []);
+        .get<Recipe[]>(RECIPE_SERVER + '/v1/recipes.json')
+        .pipe();
   }
-  getRecipeById(recipeId: number): Promise<Recipe> {
-    return null;
-    // return new Promise((reslove, reject) => {
-    //   setTimeout(() => {
-    //     for (const recipe of this.recipes) {
-    //       if (recipe.id === recipeId) {
-    //         reslove(recipe);
-    //       }
-    //     }
-    //   }, 2000);
-    // });
+  getRecipeById(recipeId: number):any {
+    return this.http
+    .get<Recipe>(RECIPE_SERVER+'/v1/recipes/'+ recipeId +'.json')
+    .pipe();
   }
 
 }

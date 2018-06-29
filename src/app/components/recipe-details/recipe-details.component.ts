@@ -26,10 +26,12 @@ export class RecipeDetailsComponent implements OnInit {
     // console.log(id);
     this.route.paramMap.subscribe((params: ParamMap) => {
       const recipeId = parseInt(params.get('recipeId'), 10);
-      this.recipeService.getRecipeById(recipeId).then((recipe) => {
-        this.recipe = recipe;
-        console.log(recipe);
-      });
+      this.recipeService.getRecipeById(recipeId).subscribe(
+        recipes =>{
+          console.log(recipes.data);
+          this.recipe = recipes.data;
+        }
+      )
     });
   }
   gobackbuttonPressed(): void {
